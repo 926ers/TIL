@@ -18,7 +18,6 @@ n, m은 자연수이고, K는 n-dim 실수에 속하는 작은 범위(근사할 
 <br>
 <br>
 
-
 관련 1차 코드
 
 ```
@@ -77,13 +76,12 @@ plt.legend()
 plt.title('Universal Approximation with PyTorch')
 plt.show()
 ```
-[출처 : https://velog.io/@jenesoolee/Universal-Approximation-Theorem]
 
+[출처 : https://velog.io/@jenesoolee/Universal-Approximation-Theorem]
 
 RELU의 조합만으로도 비선형 함수를 만들 수 있듯이 근사가 가능하다는 말인것 같습니다.
 <br>
 <br>
 성능은 1/100 파라미터 수 대비 100배의 정확도(mse에서 100배 차이 난다는 뜻)를 보여준다고 합니다.
 
-
-![summary](https://github.com/926ers/TIL/assets/42092560/547e4cbe-2250-47d7-85ec-5fa791af4b3b)
+![summary](C:\Users\bosung\Desktop\TIL\2024_05_03\sdh\summary.png)
