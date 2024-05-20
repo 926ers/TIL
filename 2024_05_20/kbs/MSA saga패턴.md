@@ -15,7 +15,7 @@ SAGA 패턴이란 **마이크로서비스들끼리 이벤트를 주고 받아 �
 
 이러한 과정을 통해서 순차적으로 트랜잭션이 처리되며, 마지막 트랜잭션이 끝났을 때 데이터가 완전히 영속되었음을 확인하고 종료합니다. 이 방법을 통해서 최종 일관성(Eventually Consistency)를 달성할 수 있습니다.
 
-![Untitled.png](C:\Users\bosung\Desktop\TIL\2024_05_20\kbs\asset\Untitled.png)
+![Untitled.png](https://github.com/926ers/TIL/blob/main/2024_05_20/kbs/asset/Untitled.png?raw=true)
 
 
 
