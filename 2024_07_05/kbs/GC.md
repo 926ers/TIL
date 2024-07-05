@@ -37,8 +37,6 @@ GC 원리
 
 메모리들을 정리하는 작업 -> compaction(빈공간 을 모으는?)
 
-
-
 잠깐만! 마킹하는법
 
 - **마킹 단계**:
@@ -52,3 +50,76 @@ GC 원리
   - 마크된 객체는 마크를 해제하여 다음 사이클을 준비.
 
 루트 집합은 프로그램의 실행 스택, 전역 변수, 정적 변수 등이 포함됩니다. 이들로부터 접근 가능한 객체를 기준으로 시작합니다.
+
+
+
+3. mark and compact algorithm
+- sweep 작업 이후 compact 작업이 추가 되어 있는 메모리를 모아주는 작업을 진행
+
+- compact 작업과 레퍼런스를 업데이트하는 작업으로 인해 오버헤드가 발생할 수 있음
+  
+  ![](GC_assets/2024-07-05-23-12-32-image.png)
+
+
+
+일반적인 GC 과정
+
+1. 객체를 Eden영역에 생성
+
+2. Minor GC 발생시 미사용 객체 제거와 사용중인 객체는 survivor1,2 로 이동
+- 객체의 크기가 서바이버보다 크면 바로 old로 이동
+3. 서바이버 둘중 하나는 비어져 있어야한다
+- 서바이버 영역이 가득차면 사용중인 객체는 다른 서바이버로
+
+- 안 쓰면 제거
+4. 1~3을 반복하면서 오래 살아남은 객체를 old generation으로 이동 (promotion)
+
+5. old generation 영역이 어느 정도 차면 Major GC 발생 ->stop the world
+
+
+
+GC  종류
+
+Serial GC
+
+- mark and compact 알고리즘
+
+- 하나의 cpu로  young , old generation 연속적으로 처리
+
+- GC 수행중 stop the world
+
+parallel GC
+
+- 자바 7~8
+
+- 다른 cpu가 GC의 진행 시간동안 대기 상태를 최소화
+
+- GC 병렬적으로 처리
+
+parallel old GC
+
+- old GC도 병렬로 처리
+
+Cocurrent Mark Sweep GC
+
+- 어플리케이션과 GC 의 스레드가 동시에 실행되어 stop the world 최소화
+
+- compact 작업  X -> parallel GC와 차이
+
+G1 GC
+
+- 큰 메모리에서 사용하기 적합한 GC(대규모 heap 사이즈에서 짧은 GC 시간을 보장하기위해 )
+
+- 전체 heap을 Region 영역으로 분할하여 동적으로 부여(young, s1, s2, old가 동적)
+
+
+
+Z GC
+
+- zpage라는 영역 사용 (region과 비슷, 크기를 2mb 의 배수로 운영이 차이점)
+
+- 정지시간이 10ms 넘지 않도록하느것이 목적
+
+- 힙 사이즈가 증가해도 정지시간이 증가 X
+
+- 아직은 실험적 
