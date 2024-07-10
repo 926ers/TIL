@@ -1,0 +1,16 @@
+스프링 스프링부트 차이점
+
+dependency 관리
+ 버전관리, spring boot starter 패키지로 일괄적으로 관리
+
+간단한 설정
+yml, properties로 configuration 관리 편함
+
+내장 서버
+tomcat 서버가 있어 구동 시간 단축
+jetty로 사용도 가능
+내장 서버가 있어 jar파일로 간단하게 배포가능
+
+스프링부트 autocomfigure 자동으로 등록해주는 빈들이 있어요
+
+개발자들이 개발에만 집중할수 있도록해준다

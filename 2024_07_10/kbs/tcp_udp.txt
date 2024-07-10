@@ -1,0 +1,48 @@
+transport layer
+endpoint 간 신뢰성있는 데이터 전송을 담당하는 계층
+데이터를 순차적, 안정적인 전달
+포트에 해당하는 프로세스에 데이터를 전달
+문제가 생기는 경우
+데이터 순차 전송x
+송수신자 간의 데이터 처리 속도에 맞춰 전송
+네트워크 데이터 처리 속도(라우터) 가 혼잡할때
+---> 데이터 손실
+
+tcp 통신
+신회성있는 데이터 통신을 가능하게 하는 프로토콜
+3 way handshake 양방향 통신
+순차성 보장
+ flow control
+cogestion control
+error detection
+
+세그먼트 tcp 프로토콜의 pdu
+어플리케이션 레이어어의 데이터를 나눠 tcp 헤더를 추가  ->
+ 시퀀스 넘버 acknolegement number 가 있어요 
+9bit의 플래그 넘버가 tcp 연결 제어 및 데이터 관리함( syn, ack,fin, ...)
+-> 핸드 쉐이크시 syn, ack 비트를 1로 설정해 패킷 송신
+
+데이터 전송 방식
+pack -->
+ack <---
+packet(ack 안오면 재전송)
+
+4way handshake
+fin -->
+ack <--
+남은 패킷 <--- (대기 시간 )
+fin <--
+ack--->
+
+
+udp
+신뢰성 떨어지지만 속도가 일반적으로 빠름
+connectionless
+error detection
+데이터 신뢰성이 중요하지 않을때
+
+udp 헤더
+어플리케이션 데이터를 안나눔 -> 나눠서 전달해야한다
+포트 번호 16비트 체크 부분 끝
+
+적절한 상황에 사용해야한다. 성능 개선 가능!
