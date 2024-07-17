@@ -1,0 +1,88 @@
+모던 자바?
+자바 8 이후의 새로운 기술을 사용하는 개발 페러다임
+
+1. 람다와 스트림
+lambda
+메소드를 하나의 식으로 표현_> 코드가 간결 명확
+findCrewByPredicate(crews, crew -> BACKEND.equals(crew.getCourse());
+람다식은 파라미터 화살표 바디로 구성
+코드의 가독성과 의도를 명확히 함
+리턴 타입 X, 이름도 없어서 익명함수 또는 익명 객체라고도 함
+(x, y) -> x+ y;
+익명함수
+@FunctionalInterface -> 익명함수를 쓰겠다는 명시
+
+2. 멀티코어 환경 대응
+stream
+컬렉션 처리를 위한 새로운 API
+다량의 데이터 처리 작업을 위해 자바8에서 등장
+초기 데이터 -> 중간 연산 -> 최종연산 의 구조
+메서드 체이닝방식 사용
+
+중간 연산
+filter: 조건에 맞는 요소만 뽑기
+map: 원하는 필드만 뽑거나 특정 형태로 반환
+distinct: 중복제거
+sort: 스트림 요소 정렬
+linit: 스트림의 일부 잘라내기
+
+최종연산
+collect: 리스트, 맵 정수 타입의 컬렉션 생성
+count: 스트림 요소들의 개수 반환
+max, min: 스트림 요소들의 최대 최소
+allMatch: 스트림 요소가 모두 만족하는지
+anyMatch: 하나라도 만족하는지
+
+지연 연산을 수행 -> 최종 연산 전까지 실직적 연산X
+명시적으로 병렬로 지정하지 않는 이상 순차적으로 처리
+parallelStream -> 병렬 처리에 용이 (성능이슈?)
+
+List<Interger> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+3. 높은 안정성
+optional ->값을 최대 1개 가질수있는 객체
+메소드가 특정 조건에서 값을 반환할 수 없다면? -> nullpoint Exception처리, null 처리 필요
+메소드의 명시적으로 null 가능성을 표현 가능
+코드가독성 증가
+NullPointException 방지
+객체 생성 비용
+OPtional -> 직렬화 지원X
+
+Optional 생성 방법
+empty: 빈 optinoal 반환
+of() 값을 감싼 optional 반환, 값 없다면 NullpointException
+ofNullable: 값이 없다면 빈 Optional 반환
+
+optional클래스 사용법
+get(): 값 반환, 값 없다면 NoSucElementException 발생
+orElse():  값 반환, 값 없다면 기본값
+orElseGet(): 값 반환, 없다면 Supplier에서 생성한 ㄱ값 반환
+Crew crew = Optional.ofNullable(null).orElseGet(() -> new Crew("kbs"));
+
+언제쓰면 안될까?
+단순히 값을 얻으려고 할때 -> 널포인터 대신 노서치엘리멘트 익셉션이 발생
+생성자, 수정자, 메서드의 파라미터 등으로 사용하는 경우 -> 이 메소드에서 하는게 맞나?
+필드나 Getter -> 직렬화 문제 
+Collection을 사용하는 경우 -> Collections.emptyList() 반환하는 방법있따
+
+자바 8 이후 추가된 기능
+자바 10: var 타입추가-> 로컬 변수 타입 추론
+자바11
+isBlanK() 공백문자만 포함 되었는지
+lines(): '\n' 기준으로 쪼개서 stream 으로 제공
+repeat() 문자열 반복
+
+자바15
+formatted
+String.format("name: %s", "hoy"); == "name: %s".formatted("hoy");
+
+자바 16
+collect 없이 toList()로 바로 List로 반환
+instanceof Object를 특정 타입으로 사용가능
+
+자바 17
+seald 타입 상속 할수있는 타입 제한 + permits
+ex)
+public sealed interface human permits age, height{}
+
+
