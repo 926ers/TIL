@@ -5,7 +5,7 @@ def list_files_recursive(directory, level=0):
     with os.scandir(directory) as entries:
         for entry in entries:
             # 현재 항목의 이름을 출력
-            if entry.is_file and (entry.name.endswith('md') or entry.name.endswith('txt')) and directory.split("/")[-1] == 'kbs' :
+            if entry.is_file and (entry.name.endswith('md') or entry.name.endswith('txt')) and directory.split("/")[-1] in ('KBS', 'kbs') :
                 print(directory.split("/")[1], '    ' * level + entry.name)
                 kbs_md_list.append(directory.split("/")[1] + '    ' * level + entry.name)
             # 항목이 디렉토리인 경우, 재귀적으로 탐색
