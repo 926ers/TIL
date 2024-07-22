@@ -1,0 +1,33 @@
+Database lock
+Mysql engine level
+- 각 storage에 영향
+- 글로벌 락
+-- mysql 전체 락
+-- 수정, 삭제 불가
+-- 트랜잭션을 지원하지 않는 엔진을 위해 사용했었다
+
+- 백업 락
+-- 조회, 추가 삭제 가능
+-- 테이블 생성 삭제, 사용자 관리 불가
+
+- 테이블 락
+-- 테이블 구조 변경시 획득
+-- 데이터 변경시 -> innodb는 x
+
+Storage engine level
+- storage 별 잠금
+- 레코드 락
+-- innodb
+-- 각 인덱스의 레코드에 락
+ 
+- 갭 락
+-- 기본 격리 -> repeatable read
+-- 레코드와 인접한 레코드 사이에 새로운 데이터 생성 X
+-- phantom read 막음
+--- https://hudi.blog/transaction-isolation-level/
+--- 한 트랜잭션에서 같은 쿼리에 다른 결과 -> 행의 수가 다르것
+
+- 넥스트 키 락
+-- 레코드락 + 갭락
+-- 데드락 발생전 감지하여 늦게 실행된 트랜잭션 롤백
+

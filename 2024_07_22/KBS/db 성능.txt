@@ -1,0 +1,26 @@
+실행 계획
+- 옵티마이저는 통계 정보를 기반으로 비용을 계산
+- 가장 비용이 적은 처리 방식을 선택
+- 쿼리를 어떻게 처리할건지 계산 결과
+- explain 명령어 후 쿼리를 입력해 확인 가능
+- explain analyze
+
+Type
+- const: pk를 사용시
+- ref: 인덱스를 사용한 동등 비교
+- range: 인덱스 범위 검색
+- eq_ref, ref: pk, unique or not null 컬럼과 동등 비교로 join하는 경우
+- index(index full scan): 인덱스를 모두 조회 -> full scan 보단 좋다
+- all: full scan -> disk io 많음, 데이터가 적거나, 데이터가 25% 이상인경우
+
+
+Extra: 쿼리의 실행 계획에서 성능에 관련된 중요한 내용 표시
+
+
+
+인덱스 검색에서 일치하는 키 값의 레코드를 읽음 -> disk io 발생
+최적화 ->disk io 감소
+커버링 인덱스: 인덱스로 설정한 칼럼만 읽어쿼리를 처리
+- select * from crew X
+- 인덱스 테이블만 조회하면 됨
+- select 성, 이름 from crew 
